@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Library Management System</h1>
+
+        <div class="search">
+            <select id="searchFilter">
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+                <option value="genre">Genre</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Search">
+            <button onclick="searchBooks()">Search</button>
+            <button onclick="resetSearch()">Reset</button>
+        </div>
+
+        <div id="bookList"></div>
+
+        <button onclick="openModal()">Add New Book</button>
+    </div>
+
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Book</h2>
+            <div class="form">
+                <input type="text" id="title" placeholder="Title">
+                <input type="text" id="author" placeholder="Author">
+                <input type="number" id="pages" placeholder="Pages">
+                <input type="text" id="genre" placeholder="Genre">
+                <button onclick="addBook()">Add Book</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDetailsModal()">&times;</span>
+            <h2>Book Details</h2>
+            <div id="bookDetails"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

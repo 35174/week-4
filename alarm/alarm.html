@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <style>
+         *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    font-style: Bold;
+    font-size: large;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #282c34;
+    background-image: url("https://www.pixel4k.com/wp-content/uploads/2018/09/clock-fantasy-mysterious-girl-time-4k_1536098152.jpg.webp");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    color: #111111;
+}
+
+.container {
+    text-align: center;
+    border:2px solid rgb(198, 190, 115);
+    border-top-left-radius: 60px;
+            border-bottom-right-radius: 10px;
+    width: 500px;
+    
+}
+
+.clock, .alarm-setting {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d5a515;
+    border: none;
+    color: #282c34;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d5a515;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="clock">
+            <h1>Current Time</h1>
+            <p id="currentTime"></p>
+        </div>
+        <div class="alarm-setting">
+            <h2>Set Alarm</h2>
+            <form id="alarmForm">
+                <label for="alarmTime">Alarm Time (HH:MM:SS AM/PM):</label>
+                <input type="text" id="alarmTime" required>
+                <button type="submit">Set Alarm</button>
+            </form>
+            <p id="alarmStatus"></p>
+        </div>
+        <audio id="alarmSound" src="alarm.mp3" preload="auto"></audio>
+    </div>
+    <script>
+        function updateCurrentTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { hour12: true });
+    document.getElementById('currentTime').innerText = timeString;
+}
+
+function checkAlarm(alarmTimeString) {
+    const now = new Date();
+    const currentTimeString = now.toLocaleTimeString('en-US', { hour12: true });
+    if (alarmTimeString === currentTimeString) {
+        document.getElementById('alarmSound').play();
+        document.getElementById('alarmStatus').innerText = 'Alarm Ringing!';
+    }
+}
+
+document.getElementById('alarmForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const alarmTimeString = document.getElementById('alarmTime').value.trim();
+    document.getElementById('alarmStatus').innerText = `Alarm set for ${alarmTimeString}`;
+    
+    setInterval(() => {
+        checkAlarm(alarmTimeString);
+    }, 1000);
+});
+
+setInterval(updateCurrentTime, 1000);
+updateCurrentTime();
+
+    </script>
+</body>
+</html>
